@@ -1,19 +1,15 @@
-function getHint(secret, guess) {
-  let bulls = 0;
-  let cows = 0;
-  const map = new Map();
-  for (let i = 0; i < secret.length; i++) {
-    if (secret[i] === guess[i]) {
-      bulls++;
-    } else {
-      map.set(secret[i], (map.get(secret[i]) || 0) + 1);
-    }
+function productExceptSelf(nums) {
+  const n = nums.length;
+  const result = new Array(n).fill(1);
+  let product = 1;
+  for (let i = 0; i < n; i++) {
+    result[i] *= product;
+    product *= nums[i];
   }
-  for (let i = 0; i < guess.length; i++) {
-    if (secret[i] !== guess[i] && map.has(guess[i]) && map.get(guess[i]) > 0) {
-      cows++;
-      map.set(guess[i], map.get(guess[i]) - 1);
-    }
+  product = 1;
+  for (let i = n - 1; i >= 0; i--) {
+    result[i] *= product;
+    product *= nums[i];
   }
-  return `${bulls}A${cows}B`;
+  return result;
 }
