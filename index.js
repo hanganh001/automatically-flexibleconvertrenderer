@@ -1,3 +1,6 @@
-const originalObject = { name: "Alice", age: 30 };
-const clonedObject = JSON.parse(JSON.stringify(originalObject));
-console.log(clonedObject); // { name: "Alice", age: 30 }
+function isPalindrome(str) {
+  const reversed = str.split("").reverse().join("");
+  return str === reversed;
+}
+
+console.log(isPalindrome("racecar")); // true
