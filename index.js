@@ -1,15 +1,20 @@
-const selectionSortRecursive = (arr, start = 0) => {
-  if (start >= arr.length - 1) {
-    return arr;
-  }
-  let minIndex = start;
-  for (let i = start + 1; i < arr.length; i++) {
-    if (arr[i] < arr[minIndex]) {
-      minIndex = i;
+function findCircleNum(M) {
+  if (!M || M.length === 0) return 0;
+  const visited = new Array(M.length).fill(false);
+  let count = 0;
+  for (let i = 0; i < M.length; i++) {
+    if (!visited[i]) {
+      dfs(M, i, visited);
+      count++;
     }
   }
-  if (minIndex !== start) {
-    [arr[start], arr[minIndex]] = [arr[minIndex], arr[start]];
+  return count;
+}
+function dfs(M, i, visited) {
+  visited[i] = true;
+  for (let j = 0; j < M.length; j++) {
+    if (M[i][j] === 1 && !visited[j]) {
+      dfs(M, j, visited);
+    }
   }
-  return selectionSortRecursive(arr, start + 1);
-};
+}
